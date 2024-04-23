@@ -1,0 +1,13 @@
+body {
+    overflow: hidden;
+    background: transparent;
+}
+
+.main_container{
+    background-image: linear-gradient(red, yellow);
+    margin: 0;
+    padding: 0;
+    border: 2px solid #ff6100;
+    border-radius: 0.5rem;
+    background-color:transparent
+}
