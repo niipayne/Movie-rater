@@ -1,0 +1,11 @@
+{
+    "name" : "Movie Rater",
+    "version" : "1.0.0",
+    "manifest_version": 2,
+    "description": "Get IMDb rating of movies",
+    "author": "Nii Payne, Emmaunel, Kris",
+    "browser_action" : {
+        "default_popup": "index.html",
+        "default_title": "Movie Rater"
+    }
+}

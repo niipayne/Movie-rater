@@ -33,7 +33,10 @@ async function fetchTitleId(title) {
 	try {
 		const response = await fetch(url2, options2);
 		const result = await response.json();
+		const rating = result["results"]["averageRating"];
 		console.log(title + " IMDb rating " + result["results"]["averageRating"]);
+		document.getElementById("Rating").innerHTML =
+			title + " IMDb rating " + rating;
 	} catch (error) {
 		console.error(error);
 	}
