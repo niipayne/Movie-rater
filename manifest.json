@@ -1,11 +1,42 @@
 {
     "name" : "Movie Rater",
     "version" : "1.0.0",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "description": "Get IMDb rating of movies",
     "author": "Nii Payne, Emmaunel, Kris",
     "browser_action" : {
         "default_popup": "index.html",
         "default_title": "Movie Rater"
+    },
+    "permissions": ["storage", "tabs"],
+    "host_permissions": ["https://*.netflix.com/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://*.netflix.com/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/bookmark.png",
+          "assets/play.png",
+          "assets/delete.png",
+          "assets/save.png"
+        ],
+        "matches": ["https://*.netflix.com/*"]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        "16": "assets/ext-icon.png",
+        "24": "assets/ext-icon.png",
+        "32": "assets/ext-icon.png"
+      },
+      "default_title": "Netflix ratings",
+      "default_popup": "popup.html"
     }
 }
