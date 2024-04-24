@@ -10,6 +10,11 @@
     });
 
     const pageRefresh = async () => {
+        if (movieTitle == document.getElementsByClassName("storyArt detail-modal has-smaller-buttons")[0].getElementsByTagName("img")[0].alt) {
+            // console.log('return')
+            return
+        }
+        // console.log('ocntinued')
         movieTitle = document.getElementsByClassName("storyArt detail-modal has-smaller-buttons")[0].getElementsByTagName("img")[0].alt;
         movieYear = document.getElementsByClassName("videoMetadata--second-line")[0].innerText.split("\n")[0];
         
@@ -55,6 +60,7 @@ async function fetchTitleId(title) {
       try {
           const response = await fetch(url, options);
           const result = await response.json();
+          console.log(result)
           id = result["results"]["0"]["id"];
           Promise.toString(id);
       } catch (error) {
