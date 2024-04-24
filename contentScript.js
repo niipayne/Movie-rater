@@ -1,5 +1,5 @@
 (() => {
-    let netflixButtonBar, rating, movieTitle, movieYear;
+    let netflixButtonBar, rating, movieTitle, movieYear, rate;
 
     chrome.runtime.onMessage.addListener((obj, sender, response) => {
         const { type, value, videoId } = obj;
@@ -11,10 +11,25 @@
 
     const pageRefresh = async () => {
         if (movieTitle == document.getElementsByClassName("storyArt detail-modal has-smaller-buttons")[0].getElementsByTagName("img")[0].alt) {
-            // console.log('return')
+            movieTitle = document.getElementsByClassName("storyArt detail-modal has-smaller-buttons")[0].getElementsByTagName("img")[0].alt;
+            movieYear = document.getElementsByClassName("videoMetadata--second-line")[0].innerText.split("\n")[0];
+            
+            
+            rating = document.getElementsByClassName("videoMetadata--first-line")[0]
+
+
+            const ratingSpan = document.createElement("span");
+            const ratingText = document.createTextNode(`IMDB: ${rate}`);
+
+            ratingSpan.appendChild(ratingText);
+            ratingSpan.id = "ratingElement";
+
+            rating.append(ratingSpan);
+
+            ratingSpan.style.color = "#46d369"
+            ratingSpan.style.fontWeight = 500
             return
         }
-        // console.log('ocntinued')
         movieTitle = document.getElementsByClassName("storyArt detail-modal has-smaller-buttons")[0].getElementsByTagName("img")[0].alt;
         movieYear = document.getElementsByClassName("videoMetadata--second-line")[0].innerText.split("\n")[0];
         
@@ -23,7 +38,7 @@
         
         rating = document.getElementsByClassName("videoMetadata--first-line")[0]
 
-        let rate = await this.fetchTitleId(movieTitle)
+        rate = await this.fetchTitleId(movieTitle)
 
         const ratingSpan = document.createElement("span");
         const ratingText = document.createTextNode(`IMDB: ${rate}`);
@@ -35,7 +50,6 @@
 
         ratingSpan.style.color = "#46d369"
         ratingSpan.style.fontWeight = 500
-
     }
 
     pageRefresh();
