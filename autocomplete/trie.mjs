@@ -1,4 +1,4 @@
-// code is from https://blog.javascripttoday.com/blog/trie-data-structure/
+// code modified from https://blog.javascripttoday.com/blog/trie-data-structure/
 
 class TrieNode {
     constructor() {
