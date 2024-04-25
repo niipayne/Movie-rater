@@ -3,8 +3,8 @@
     We need to first get the dataset from imdb and extract it into a file called 'primarytitles.txt'.
     This code will not work unless you increase the memory space allocated to nodeJS
     Type in `node -e 'console.log(v8.getHeapStatistics().heap_size_limit/(1024*1024))' to check how much space is allocated
-    Around 8000 mb is sufficient
-    Type in `$env:NODE_OPTIONS="--max-old-space-size=8192"` to increase. size is in MB
+    Around 12000 mb is sufficient
+    Type in `$env:NODE_OPTIONS="--max-old-space-size=12000"` to increase. size is in MB
     My idea is that we're gonna have to do this periodically
 */
 
@@ -22,6 +22,4 @@ for(let i = 0; i < 500000; i+=50000){
 }
 
 console.log(trie.root)
-
-
 fs.writeFileSync('titles_trie.emmanuel', Pako.deflate(JSON.stringify(trie.root)))
