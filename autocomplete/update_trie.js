@@ -11,6 +11,7 @@
 const fs = require('fs')
 const Trie = require('./trie.js')
 const Pako = require('pako')
+const fflate = require('fflate')
 
 var titlesArr = fs.readFileSync("primarytitles.txt", { encoding:"utf-8" }).split("\n")
 
@@ -30,5 +31,8 @@ for(let key of Object.keys(titlesDict)){
     for(let t of titlesDict[key]){
         trie.insert(t)
     }
-    fs.writeFileSync(filepath, Pako.deflate(JSON.stringify(trie.root)))
+    // fs.writeFileSync(filepath, Pako.deflate(JSON.stringify(trie.root)))
+    let buf = fflate.strToU8(JSON.stringify(trie.root))
+    fs.writeFileSync(filepath, fflate.compressSync(buf, { level: 6, mem: 8 }))
+    // // const notSoMassive = fflate.zlibSync(massiveFile, { level: 9 })
 }

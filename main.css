@@ -1,15 +1,17 @@
 body {
     overflow: hidden;
     background: none;
+    min-width: 400px;
+    min-height: 600px;
 }
 
 .main_container{
-    background-image: linear-gradient(blue, purple);
+    /* background-image: linear-gradient(blue, purple); */
     margin: 0;
     padding: 0;
     border: 2px solid #ff6100;
     border-radius: 0.5rem;
-    background-color:transparent
+    background-color:transparent;
 }
 
 .text_box {

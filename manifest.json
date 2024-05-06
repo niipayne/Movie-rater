@@ -3,10 +3,11 @@
     "version" : "1.0.0",
     "manifest_version": 3,
     "description": "Get IMDb rating of movies",
-    "author": "Nii Payne, Emmaunel, Kris",
+    "author": "Nii Payne, Emmanuel, Kris",
     "browser_action" : {
         "default_popup": "index.html",
-        "default_title": "Movie Rater"
+        "default_title": "Movie Rater",
+        "manifest_version": 2
     },
     "permissions": ["storage", "tabs"],
     "host_permissions": ["https://*.netflix.com/*"],
@@ -37,6 +38,6 @@
         "32": "assets/ext-icon.png"
       },
       "default_title": "Netflix ratings",
-      "default_popup": "popup.html"
+      "default_popup": "index.html"
     }
 }
