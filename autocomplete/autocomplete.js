@@ -6,6 +6,7 @@
 const fs = require('fs')
 const Trie = require('./trie.js')
 const fflate = require('fflate')
+const pako = require('pako')
 
 
 function get_tries(ascii_val){
@@ -17,22 +18,32 @@ function get_tries(ascii_val){
     let t3 = performance.now()
     let decompressed = fflate.decompressSync(compressed);
     let origText = JSON.parse(fflate.strFromU8(decompressed));
+    // let origText = eval('(' + fflate.strFromU8(decompressed) + ')');
     let t4 = performance.now()
     console.log(`Call to decompress took ${t4 - t3} milliseconds.`)
     trie.root = origText;
     return trie;
 }
 
-const ta = performance.now();
-let out = get_tries(65);
-const tb = performance.now();
-console.log(`Call to get tries took ${tb - ta} milliseconds.`);
+
+function get_trie(){
+    let trie = new Trie.Trie();
+    let files = fs.readdirSync('./children_objects')
+    for(let file of files){
+        let compressed = fs.readFileSync(`./children_objects/${file}`)
+        let decompressed = JSON.parse(pako.inflate(compressed, {to: 'string'}))
+        for(let key of Object.keys(decompressed)){
+            trie['root']['children'][key] = decompressed[key]
+        }
+    }
+    console.log('finished ojk.; oloVdszc')
+    console.log(trie.getSuggestions('As'))
+    return trie
+}
+
+get_trie()
 
 
-
-// please try any prefixes you can think of
-console.log(out.getSuggestions('As')) //should return movies that start with 'Chi'
-console.log(out.getSuggestions('Arrival of the ')) //should return movies that start with 'Shr'
 
 module.exports = {
     get_tries
